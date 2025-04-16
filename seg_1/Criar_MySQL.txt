@@ -1,0 +1,30 @@
+-- Verifica se o banco de dados "seguro" existe, e se não, cria o banco de dados
+CREATE DATABASE IF NOT EXISTS seguro3;
+
+-- Usa o banco de dados "seguro3"
+USE seguro3;
+
+-- Verifica se a tabela "usuarios" já existe, e se não, cria a tabela
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    autenticacao_habilitada TINYINT(1) DEFAULT 0,
+    codigo_autenticacao INT,
+    codigo_recuperacao VARCHAR(255),
+    expiracao_codigo DATETIME,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE login_tentativas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip_address VARCHAR(45) NOT NULL,
+    tentativa_time DATETIME NOT NULL
+);
+
+
+-- Confirma a criação da tabela
+SHOW TABLES;
